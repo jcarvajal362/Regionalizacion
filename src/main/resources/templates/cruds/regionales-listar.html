@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+
+<body class="body-menu">
+
+	<div class="container-fluid">
+
+		<div th:replace="layout/layout :: alerts"></div>
+
+		<div class="row">
+			<!--==========================
+            			IZQUIERDA            
+   			 ===========================-->
+			<div th:replace="layout/layout :: opciones"></div>
+			<!--==========================
+                MITAD
+            ===========================-->
+			<div
+				class="col-xs-12 col-sm-12 col-md-12 col-lg-10 second-menu mt-1 text-center">
+				<!--======== BOTON Y TITULO =======-->
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-2">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 mt-2 text-left">
+							<a th:href="@{/menu/regionales}" class="btn btn-outline-primary"><i
+								class="fa-solid fa-arrow-left"></i> Atrás</a>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 mt-2">
+							<label class=" h2 text-shadows" th:text="${titulo}"></label>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-2"></div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+							<form class="form-inline float-right"
+								th:action="@{/menu/regionales/} + ${titulo}">
+								<div class="form-group">
+									<label class="h5"></label>
+								</div>
+								<div class="form-group">
+									<label class="mr-3 h5 text-white bg-success rounded">Fecha Inicial</label>
+									 <input id="fechaI" class="form-control box-shadows" name="fechaI" th:value="${fechaI}" type="date" required />
+								</div>
+								<div class="form-group ml-2">
+									<label class="mr-3 h5 text-white bg-success rounded">Fecha Final</label> 
+									<input id="fechaF" class="form-control box-shadows" name="fechaF" th:value="${fechaF}" type="date" required />
+								</div>
+								<div class="form-group ml-2">
+									<input type="submit" class="btn btn-outline-success" th:value="${'Filtrar'}" />
+								</div>
+								<div class="form-group ml-2">
+									<a th:href="@{/menu/regionales/} + ${titulo}"> 
+										<input type="button" class="btn btn-outline-secondary" th:value="${'Limpiar'}" />
+									</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+					<div
+						class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
+						<table
+							class="table table-striped table-active table-hover table-sm">
+							<thead>
+								<tr>
+									<th>Nivel</th>
+									<th>Programa</th>
+									<th>Facultad</th>
+									<th>Estudiantes Matriculados</th>
+									<th>Docentes Asignados</th>
+									<th>Fecha</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="estdocprog : ${estdocprog}"
+									th:if="${estdocprog.programa.facultad.regional.nombre} == ${titulo} and ${ not #lists.isEmpty(estdocprog)} ">
+									<td th:text="${estdocprog.programa.nivel}"></td>
+									<td th:text="${estdocprog.programa.nombre} +' - Snies '+${estdocprog.programa.serial}" class="text-left"></td>
+									<td th:text="${estdocprog.programa.facultad.nombre== 'FACULTAD DE CIENCIAS SOCIOECONÓMICAS Y EMPRESARIALES'}  ? 'FCSE' : 'FCNI' "> </td>
+									<td th:text="${estdocprog.ecantidad}"></td>
+									<td th:text="${estdocprog.dcantidad}"></td>
+									<td th:text="${#calendars.format(estdocprog.fecha,'dd/MM/yyyy')}"></td>
+								</tr>
+							</tbody>
+
+						</table>
+						<div class="alerta" th:if="${#lists.isEmpty(estdocprog)}">
+								<label class="m-2">No hay información en la Base de Datos</label>
+							</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+
+</html>

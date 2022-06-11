@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body class="body-menu">
+	<div class="container-fluid">
+		<div class="row">
+			<!--==========================
+            			IZQUIERDA            
+   			 ===========================-->
+			<div th:replace="layout/layout :: opciones"></div>
+			<!--==========================
+                MITAD
+            ===========================-->
+			<div
+				class="col-xs-12 col-sm-12 col-md-12 col-lg-10 mt-2 second-menu text-center">
+
+				<div th:replace="layout/layout :: login"></div>
+
+
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-2">
+
+					<div class="row">
+
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 text-center">
+							<!-- Boton para desplegar opcion -->
+							<button type="button" class="btn btn-success box-shadows"
+								data-toggle="modal" data-target="#reporteS">Listado
+								Excel</button>
+							<!-- Modal desde Layout-->
+							<div th:replace="layout/layout :: reporteS"></div>
+						</div>
+
+
+
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+							<label class="h1 text-shadows">REGIONALES</label>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
+							<a th:href="@{/menu/regionales/listar}"
+								class="btn btn-outline-success btn-sm mt-2">Listado
+								Regionales</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-2">
+
+						<div class="alerta" th:if="${#lists.isEmpty(regional)}">
+							<label class="m-2">No hay información en la Base de Datos</label>
+						</div>
+
+
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3"
+								th:each="regional: ${regional}"
+								th:if="${not #lists.isEmpty(regional)}">
+
+								<a th:href="@{/menu/regionales/} + ${regional.nombre}">
+									<div class="card card-reg">
+										<div class="card-body">
+											<label class="h2 lab" th:text="${regional.nombre}"></label><br />
+											<label class="h5 lab" th:text="${regional.direccion}"></label>
+										</div>
+									</div>
+								</a>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

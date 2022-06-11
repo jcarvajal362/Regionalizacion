@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+
+<body class="body-menu">
+
+	<div class="container-fluid">
+
+		<div th:replace="layout/layout :: alerts"></div>
+
+		<div class="row">
+			<!--==========================
+            			IZQUIERDA            
+   			 ===========================-->
+			<div th:replace="layout/layout :: opciones"></div>
+			<!--==========================
+                MITAD
+            ===========================-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 second-menu text-center mt-1">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-2">
+					<a th:href="@{/menu/estudiantes}" class="float-left btn btn-outline-primary mt-1 "> <i
+							class="fa-solid fa-arrow-left"></i> Atrás
+					</a>
+					<h1 th:text="${titulo}" class="text-center text-shadows"></h1>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+						<form class="form-inline float-right" th:action="@{/menu/estudiantes/Consolidado/listar/}">
+							<div class="form-group">
+								<label class="h5"></label>
+							</div>
+							<div class="form-group">
+								<label class="mr-3 h5 text-white bg-success rounded">Fecha Inicial</label>
+								<input id="fechaInicio" class="form-control box-shadows" name="fechaInicio"
+									th:value="${fechaInicio}" type="date" required />
+							</div>
+							<div class="form-group ml-2">
+								<label class="mr-3 h5 text-white bg-success rounded">Fecha Final</label>
+								<input id="fechaFinal" class="form-control box-shadows" name="fechaFinal"
+									th:value="${fechaFinal}" type="date" required />
+							</div>
+							<div class="form-group ml-2">
+								<input type="submit" class="btn btn-outline-success" th:value="${'Filtrar'}" />
+							</div>
+							<div class="form-group ml-2">
+								<input type="button" class="btn btn-outline-secondary" th:value="${'Limpiar'}"
+									onclick="LimpiarCampos()" />
+							</div>
+						</form>
+
+						<button type="button" class="btn btn-success float-left box-shadows" data-toggle="modal"
+							data-target="#exampleModalCenter">Listado Excel</button>
+
+						<div th:replace="layout/layout :: consolidado"></div>
+
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar-2">
+							<table class="table table-striped table-active table-hover table-sm mt-2 rounded ">
+								<thead>
+									<tr>
+										<th>Regional</th>
+										<th>Cantidad</th>
+										<th>Fecha Reporte</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="lista : ${lista}" th:if="${not #lists.isEmpty(lista)}">
+										<td th:utext="${lista.getRegional()}"></td>
+										<td th:utext="${lista.getTotal()}"></td>
+										<td th:utext="${lista.getFechas()}"></td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="alerta" th:if="${#lists.isEmpty(lista)}">
+								<label class="m-2">No ha realizado la Consulta</label>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar-3 mt-3">
+							<table class="table table-striped table-active table-hover table-sm rounded ">
+								<thead>
+									<tr>
+										<th>Facultad</th>
+										<th>Programa</th>
+										<th>Regional</th>
+										<th>Cantidad</th>
+										<th>Fecha</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="reporte,iterador: ${reporte}" th:if="${not #lists.isEmpty(reporte)}">
+										<td
+											th:text="${reporte.programa.facultad.nombre == 'FACULTAD DE CIENCIAS NATURALES E INGENIERÍAS' ? 'FCNI' : ' FCSE'}">
+										</td>
+										<td th:text="${reporte.programa.nombre}" class="text-left"></td>
+										<td th:text="${reporte.programa.facultad.regional.nombre}"></td>
+										<td th:text="${reporte.cantidad}"></td>
+										<td th:text="${#calendars.format(reporte.fecha,'dd/MM/yyyy')}"></td>
+
+									</tr>
+								</tbody>
+							</table>
+							<div class="alerta" th:if="${#lists.isEmpty(reporte)}">
+								<label class="m-2">No hay información en la Base de Datos</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+
+</html>

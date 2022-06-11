@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body class="body-menu">
+	<div class="container-fluid">
+		<div class="row">
+			<!--==========================
+            			IZQUIERDA            
+   			 ===========================-->
+			<div th:replace="layout/layout :: opciones"></div>
+			<!--==========================
+                MITAD
+            ===========================-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 second-menu text-center ">
+				<div class="text-center mt-3">
+					<h1 th:text="${titulo}">Formulario</h1>
+				</div>
+				<div class="row">
+
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+						<div class="container mt-5 rounded text-light" style="background: #2A73AD; box-shadow:0px 0px 10px black;">
+
+							<form th:action="@{/menu/regionales/crud}" th:object="${regional}" method="POST">
+
+								<div class="col-12">
+									<label for="nombre" class="h5 mt-3">Nombre</label>
+									<input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Digite el nombre de la regional" required />
+								</div>
+
+								<div class="col-12 mt-3">
+									<label for="ubicacion" class="h5">Dirección</label>
+									<textarea class="form-control" id="ubicacion" placeholder="Digite la ubicación" th:field="*{direccion}" required></textarea>
+								</div>
+								<div class="col-12 mt-3 text-center">
+									<button type="submit" class="btn btn-success form-control ">Guardar</button>
+								</div>
+								<div class="col-12 mt-1 text-center">
+									<a th:href="@{/menu/regionales/listar}"
+										class="btn btn-secondary mb-3 form-control ">Cancelar</a>
+								</div>
+
+							</form>
+
+						</div>
+
+					</div>
+
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-5">
+					<a th:href="@{https://www.google.com.co/search?sa=G&hl=es_419&tbs=simg:CAQSgAIJF1q-8e5klMga9AELELCMpwgaOgo4CAQSFMoW_1gf3Nckpiir4JbAa3hfmEJ0BGhqWLyLPIJyBqqXGx1h_17KAsJsf8Dridd9WoBCAFMAQMCxCOrv4IGgoKCAgBEgReVhGcDAsQne3BCRqUAQofCgxjb252ZXJzYXRpb27apYj2AwsKCS9tLzAxaDhuMAoaCgdzaGFyaW5n2qWI9gMLCgkvbS8wNmgxMmsKHAoJZm9yIGFkdWx02qWI9gMLCgkvYS85M2N3X3kKGwoIY3VzdG9tZXLapYj2AwsKCS9tLzAxajBtawoaCgdtZWV0aW5n2qWI9gMLCgkvbS8wMWg2Y2IM&q=empresa+png&tbm=isch&ved=2ahUKEwiryKaewof4AhUBj4kEHdM5A6gQ2A4oAXoECAEQNA&biw=1366&bih=657&dpr=1#imgrc=pMB_bH_4lF4xCM}">
+						<img th:src="@{/img/empresa.png}" class=" img-fluid" alt="imagen alusiva a la empresa">				
+					</a>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

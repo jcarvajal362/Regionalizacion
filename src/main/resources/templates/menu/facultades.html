@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body class="body-menu">
+	<div class="container-fluid">
+		<div class="row">
+			<!--==========================
+            			IZQUIERDA            
+   			 ===========================-->
+			<div th:replace="layout/layout :: opciones"></div>
+			<!--==========================
+                MITAD
+            ===========================-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 mt-2 second-menu text-center ">
+
+				<div th:replace="layout/layout :: login"></div>
+
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-2">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+							<label class="h1 text-shadows">FACULTADES</label>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 ">
+							<!--<a th:href="@{/menu/facultades/listar}" class="btn btn-outline-success"><i class="fa-solid fa-list"></i></a>-->
+							<a th:href="@{/menu/facultades/listar}" class="btn btn-outline-success btn-sm mt-3" sec:authorize="hasRole('ROLE_ADMIN')">Listado Facultades</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+					<a th:href="@{/menu/facultades/FACULTAD DE CIENCIAS SOCIOECONÓMICAS Y EMPRESARIALES}"><img
+							th:src="@{/img/fcse.png}" class="img-fluid fcse" width="80%"></a>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-4">
+					<a th:href="@{/menu/facultades/FACULTAD DE CIENCIAS NATURALES E INGENIERÍAS}"><img
+							th:src="@{/img/fcni.png}" class="img-fluid fcni" width="80%"></a>
+				</div>f
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

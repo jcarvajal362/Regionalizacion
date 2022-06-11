@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body class="body-menu">
+	<div class="container-fluid">
+		<div class="row">
+			<!--==========================
+            			IZQUIERDA            
+   			 ===========================-->
+			<div th:replace="layout/layout :: opciones"></div>
+			<!--==========================
+                MITAD
+            ===========================-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 second-menu text-center ">
+				<div class="text-center mt-3">
+					<h1 th:text="${titulo}" class="text-shadows">Formulario</h1>
+				</div>
+				<div class="row"> 
+
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+
+						<div class="container mt-5 rounded text-light"
+							style="background: #2A73AD; box-shadow: 0px 0px 10px black;">
+
+							<form th:action="@{/menu/estudiantes/Reporte_Estudiantes/crud}" th:object="${reporte}" method="POST">
+
+								<div class="col-12 mt-3">
+									<label for="programa" class="h5">Programa</label>
+									<select class="form-control border border-dark" id="programa" th:field="*{programa.id}" required>
+										<option th:value="${0}" th:text="${'Seleccione una Opción'}" hidden="hidden"></option>
+										<option th:each="programa: ${programa}" th:value="${programa.id}" th:text="${programa.nombre} +' - '+ ${programa.facultad.regional.nombre}">
+										</option>
+									</select>
+								</div>
+
+								<div class="col-12">
+									<label for="cantidad" class="h5 mt-3">Cantidad</label>
+									<input type="text" th:field="*{cantidad}" class="form-control" id="cantidad" placeholder="Digite la cuantía de Estudiantes" required />
+								</div>
+
+								<div class="col-12">
+									<label for="fecha" class="h5 mt-3">Fecha</label>
+									<input type="date" id="fecha" th:field="*{fecha}" class="form-control" required />
+								</div>
+								<div class="col-12 mt-3 text-center">
+									<button type="submit" class="btn btn-primary form-control ">Guardar</button>
+									<a th:href="@{/menu/estudiantes/Reporte_Estudiantes/listar}" class="btn btn-secondary form-control mt-2 mb-3">Cancelar</a>
+								</div>
+
+							</form>
+
+						</div>
+
+					</div>
+
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 ">
+						<img th:src="@{/img/trabajador.png}" class=" img-fluid" width="60%">
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+
+</html>

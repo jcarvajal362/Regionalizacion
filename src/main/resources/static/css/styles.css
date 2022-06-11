@@ -1,0 +1,51 @@
+.body-index {
+	background: linear-gradient(to bottom right, #C3D730, #2A73AD);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	font-family: 'McLaren', cursive;
+}
+.container-index {
+	box-shadow: 0px 0px 30px black;
+	color: #575756;
+	text-shadow: 0px 0px 1px black;
+	border-radius: 10px;
+	
+}
+.fondo-index{
+	background-image: url('/img/fondo.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	border-radius:10px;
+}
+.titulo-universidad{
+	color:#C3D730;
+	text-shadow: 1px 2px 3px black;
+}
+.login-index{
+	background-color: white;
+}
+.rounded-index {
+	border-radius: 10px;
+}
+
+.form-control {
+	border: 1px solid #575756;
+	border-radius: 10px;
+}
+
+.btn-index {
+	box-shadow: 0px 0px 10px #575756;
+	background-color:#2A73AD ;
+}
+.regionales:hover {
+	background-color: green;
+	color: whitesmoke;
+}
+
+
+
+

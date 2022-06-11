@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+
+<body class="body-menu">
+
+	<div class="container-fluid">
+
+		<div th:replace="layout/layout :: alerts"></div>
+
+		<div class="row">
+			<!--==========================
+            			IZQUIERDA            
+   			 ===========================-->
+			<div th:replace="layout/layout :: opciones"></div>
+			<!--==========================
+                MITAD
+            ===========================-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 second-menu text-center mt-2">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+					<a th:href="@{/menu/facultades}" class="float-left btn btn-outline-primary mt-2 "> <i
+							class="fa-solid fa-arrow-left"></i> Atrás</a>
+					<h1 th:text="${titulo}" class="text-center text-shadows"></h1>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 centrar">
+						<a th:href="@{https://www.google.com.co/search?sa=G&hl=es_419&tbs=simg:CAQSgAIJF1q-8e5klMga9AELELCMpwgaOgo4CAQSFMoW_1gf3Nckpiir4JbAa3hfmEJ0BGhqWLyLPIJyBqqXGx1h_17KAsJsf8Dridd9WoBCAFMAQMCxCOrv4IGgoKCAgBEgReVhGcDAsQne3BCRqUAQofCgxjb252ZXJzYXRpb27apYj2AwsKCS9tLzAxaDhuMAoaCgdzaGFyaW5n2qWI9gMLCgkvbS8wNmgxMmsKHAoJZm9yIGFkdWx02qWI9gMLCgkvYS85M2N3X3kKGwoIY3VzdG9tZXLapYj2AwsKCS9tLzAxajBtawoaCgdtZWV0aW5n2qWI9gMLCgkvbS8wMWg2Y2IM&q=empresa+png&tbm=isch&ved=2ahUKEwiryKaewof4AhUBj4kEHdM5A6gQ2A4oAXoECAEQNA&biw=1366&bih=657&dpr=1#imgrc=pMB_bH_4lF4xCM}">
+							<img th:src="@{/img/empresa.png}" class=" float-center img-fluid" alt="imagen alusiva a la empresa">
+						</a>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+
+						<a th:href="@{/menu/facultades/crud}" class="float-right btn btn-success btn-shadows mb-2 "> Crear Nueva Facultad</a>
+
+						<div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
+							<table class="table table-striped table-active table-hover">
+								<thead>
+									<tr>
+										<th>Nombre</th>
+										<th>Regional</th>
+										<th colspan="2">Acción</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="facultad: ${facultad}" th:if="${not #lists.isEmpty(facultad)}">
+										<td th:text="${facultad.nombre}"></td>
+										<td th:text="${facultad.regional.nombre}"></td>
+										<td><a th:href="@{/menu/facultades/crud/} + ${facultad.id}"><i
+													class="fa-solid fa-pen-to-square text-primary h3"></i></a></td>
+										<td><a th:href="@{/menu/facultades/eliminar/} + ${facultad.id}"><i
+													class="fa-solid fa-eraser text-danger h3"></i></a></td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="alerta" th:if="${#lists.isEmpty(facultad)}">
+								<label class="m-2">No hay información en la Base de Datos</label>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

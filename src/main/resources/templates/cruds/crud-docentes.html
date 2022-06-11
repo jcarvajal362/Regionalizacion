@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body class="body-menu">
+	<div class="container-fluid">
+		<div class="row">
+			<!--==========================
+            			IZQUIERDA            
+   			 ===========================-->
+			<div th:replace="layout/layout :: opciones"></div>
+			<!--==========================
+                MITAD
+            ===========================-->
+			<div
+				class="col-xs-12 col-sm-12 col-md-12 col-lg-10 second-menu text-center ">
+				<div class="text-center mt-1">
+					<h1 th:text="${titulo}" class="text-shadows">Formulario</h1>
+				</div>
+				<div class="row">
+
+
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+
+						<div
+							class="container rounded text-light table-responsive table-wrapper-scroll-y my-custom-scrollbar-4"
+							style="background: #2A73AD; box-shadow: 0px 0px 10px black;">
+
+							<!-- enctype="multipart/form-data" -->
+
+							<form th:action="@{/menu/docentes/crud}" th:object="${docente}"
+								method="POST">
+
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<div class="row">
+										<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+											<label for="cedula" class="h5">Cedula</label> <input
+												type="text" id="cedula" th:field="*{cedula}"
+												class="form-control form-control-sm"
+												placeholder="Digite la cedula" minlength="8" maxlength="10"
+												required></input>
+										</div>
+										<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+											<label for="telefono" class="h5">Teléfono</label> <input
+												type="text" id="telefono" th:field="*{telefono}"
+												class="form-control form-control-sm"
+												placeholder="Digite el telefono" maxlength="10" required />
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<div class="row">
+										<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mt-1">
+											<label for="nombre" class="h5">Nombre</label> <input
+												type="text" id="nombre" th:field="*{nombre}"
+												class="form-control form-control-sm"
+												placeholder="Digite el nombre" required></input>
+										</div>
+										<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mt-1">
+											<label for="apellidos" class="h5">Apellidos</label> <input
+												type="text" id="apellidos" th:field="*{apellido}"
+												class="form-control form-control-sm"
+												placeholder="Digite los apellidos" required></input>
+										</div>
+									</div>
+
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<label for="pregrado" class="h5">Pregrado</label> <input
+										type="text" id="pregrado" th:field="*{pregrado}"
+										class="form-control form-control-sm"
+										placeholder="Digite la especializacion del docente" required></input>
+								</div>
+
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<div class="row">
+										<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+											<label for="posgrado" class="h5">Posgrado</label> <select
+												class="form-control form-control-sm" th:field="*{posgrado}"
+												required>
+												<option th:value="${true}" th:text="${'Seleccione'}" hidden="hidden"></option>
+												<option th:value="${true}" th:text="${'SI'}"></option>
+												<option th:value="${false}" th:text="${'NO'}"></option>
+											</select>
+										</div>
+										<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+											<label for="infoposgrado" class="h5">Información
+												Posgrado</label> <input type="text" id="infoposgrado"
+												th:field="*{infoposgrado}"
+												class="form-control form-control-sm"
+												placeholder="Digite la especializacion del docente" required></input>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<div class="row">
+										<div class="col-xs-6 col-sm-6 col-md-6 col-lg-12 ">
+											<label for="programa" class="h5">Programa</label> 
+											<select class="form-control form-control-sm" th:field="*{programa.id}" required>
+												<option th:value="${0}" th:text="${'Seleccione una Opción'}" hidden="hidden"></option>
+												<option th:each="programa: ${programa}"
+													th:value="${programa.id}"
+													th:text="${programa.facultad.regional.nombre}+' - '+${programa.modalidad}+' - '+${programa.nombre}"></option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<div class="row">
+										<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+											<label for="contrato" class="h5">Contrato</label> <select
+												class="form-control form-control-sm" th:field="*{contrato}"
+												required>
+												<option th:value="${'Seleccione una Opción'}" th:text="${'Seleccione'}" hidden="hidden"></option>
+												<option th:value="${'CATEDRA'}" th:text="${'CATEDRA'}"></option>
+												<option th:value="${'PLANTA'}" th:text="${'PLANTA'}"></option>
+											</select>
+										</div>
+										<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+											<label for="categoria" class="h5">Categoría</label> <select
+												id="categoria" class="form-control form-control-sm"
+												th:field="*{categoria}" required>
+												<option th:value="${'Seleccione una Opción'}"
+													th:text="${'Seleccione'}" hidden="hidden"></option>
+												<option th:value="${'AUXILIAR'}" th:text="${'AUXILIAR'}"></option>
+												<option th:value="${'ASISTENTE'}" th:text="${'ASISTENTE'}"></option>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<label for="observaciones" class="h5">Observaciones</label>
+									<textarea class="form-control form-control-sm"
+										th:field="*{observaciones}" id="observaciones" rows="2" required></textarea>
+
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-2">
+									<div class="row">
+										<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+											<button type="submit" class="btn btn-success form-control">Guardar</button>
+										</div>
+										<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+											<a th:href="@{/menu/docentes/listar}"
+												class="btn btn-secondary mb-3 form-control ">Cancelar</a>
+										</div>
+
+									</div>
+
+								</div>
+
+							</form>
+
+						</div>
+
+					</div>
+
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 ">
+						<img th:src="@{/img/trabajador.png}" class=" img-fluid"
+							width="100%">
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<!-- 
+		
+		
+		 -->
+</body>
+
+</html>

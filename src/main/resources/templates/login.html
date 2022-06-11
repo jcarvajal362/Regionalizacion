@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body class="body-index">
+	<div class="container container-index text-center mt-3 ">
+		<div class="row">
+			<!-- CONTENIDO DEL CONTAINER -->
+			<div class="col-12">
+				<div class="row">
+					<!-- PRIMERA DIVISION, LOGO -->
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 fondo-index"></div>
+
+					<!-- SEGUNDA DIVISION, LOGIN -->
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 rounded-index login-index">
+						<div class="col-12 p-2 mt-1">
+							<label class="h3 text-center titulo-universidad">Unidades Tecnológicas de Santander</label>
+						</div>
+						<div class="col-12">
+							<label class="h5 text-center">Dirección de Regionalización</label>
+						</div>
+						<div class="col-12 mt-2 ">
+							<i class="fa-solid fa-building-columns display-4 logo"></i>
+						</div>
+
+						<form class="col-12 mt-3 p-3" th:action="@{/menu/usuario/login-ingresar}" method="post">
+
+							<div th:replace="layout/layout :: alertsLogin"></div>
+
+							<div class="col-12">
+								<label class="h5" for="username">Usuario</label>
+							</div>
+							<div class="col-12 mt-3">
+								<input type="text" name="username" id="username" class="form-control"
+									autofocus="autofocus" placeholder="Digite su usuario" required>
+							</div>
+							<div class="col-12 mt-3">
+								<label for="password" class="h5">Contraseña</label>
+							</div>
+							<div class="col-12 mt-3">
+								<input id="password" type="password" name="password" class="form-control" required
+									autofocus="autofocus" placeholder="Digite su contraseña">
+							</div>
+							<div class="col-12 mt-4 ">
+								<button type="submit" class="btn btn-primary btn-index" name="login-submit"
+									id="login-submit">Acceder</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

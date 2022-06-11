@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body class="body-menu">
+	<div class="container-fluid">
+		<div class="row">
+			<!--==========================
+            			IZQUIERDA            
+   			 ===========================-->
+			<div th:replace="layout/layout :: opciones"></div>
+			<!--==========================
+                MITAD
+            ===========================-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 second-menu text-center ">
+				<div class="text-center mt-3">
+					<h1 th:text="${titulo}" class="text-shadows">Formulario</h1>
+				</div>
+				<div class="row">
+
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+
+						<div class="container mt-2 rounded text-light" style="background: #2A73AD; box-shadow: 0px 0px 10px black;">
+
+							<form th:action="@{/menu/programas/crud}" th:object="${programa}" method="POST">
+
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<label for="nombre" class="h5 mt-2">Nombre</label>
+									<input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Digite el nombre del programa" required />
+								</div>
+
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<label for="serial" class="h5 mt-2">Serial</label>
+									<input type="text" id="serial" th:field="*{serial}" class="form-control" placeholder="Digite el serial" required />
+								</div>
+
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<label for="nivel" class="h5 mt-2">Nivel</label>
+									<select class="form-control border border-dark" th:field="*{nivel}" required>
+										<option th:value="${'Seleccione una Opción'}" th:text="${'Seleccione una Opción'}" hidden="hidden"></option>
+										<option th:value="${'TECNOLÓGICO'}" th:text="${'TECNOLÓGICO'}"></option>
+										<option th:value="${'UNIVERSITARIO'}" th:text="${'UNIVERSITARIO'}">
+										</option>
+									</select>
+								</div>
+
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<label for="modalidad" class="h5 mt-2">Modalidad</label>
+									<select class="form-control border border-dark" id="modalidad" th:field="*{modalidad}" required>
+										<option th:value="${'Seleccione una Opción'}" th:text="${'Seleccione una Opción'}" hidden="hidden"></option>
+										<option th:value="${'VIRTUAL'}" th:text="${'VIRTUAL'}"></option>
+										<option th:value="${'PRESENCIAL'}" th:text="${'PRESENCIAL'}">
+										</option>
+									</select>
+								</div>
+
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-2">
+									<label for="facultad" class="h5">Facultad</label>
+									<select class="form-control border border-dark" id="facultad" th:field="*{facultad.id}" required>
+										<option th:value="${0}" th:text="${'Seleccione una Opción'}" hidden="hidden"></option>
+										<option th:each="facultad: ${facultad}" th:value="${facultad.id}" th:text="${facultad.regional.nombre}+' - '+${facultad.nombre}"></option>
+									</select>
+
+								</div>
+
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3 text-center">
+									<button type="submit" class="btn btn-success form-control ">Ingresar</button>
+									<a th:href="@{/menu/programas/listar}" class="btn btn-secondary form-control mt-2 mb-3">Cancelar</a>
+								</div>
+
+							</form>
+
+						</div>
+
+					</div>
+
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 ">
+						<img th:src="@{/img/trabajador.png}" class=" img-fluid" width="62%">
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<!-- 
+		
+		
+		 -->
+</body>
+
+</html>

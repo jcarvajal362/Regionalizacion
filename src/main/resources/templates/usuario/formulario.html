@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body class="body-menu">
+	<div class="container-fluid">
+		<div class="row">
+			<!--==========================
+            			IZQUIERDA            
+   			 ===========================-->
+			<div th:replace="layout/layout :: opciones"></div>
+			<!--==========================
+                MITAD
+            ===========================-->
+			<div
+				class="col-xs-12 col-sm-12 col-md-12 col-lg-10 second-menu text-center ">
+				<div class="text-center mt-3">
+					<h1 th:text="${titulo}" class="text-shadows">Formulario</h1>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+						<div class="container mt-3 rounded text-light"
+							style="background: #2A73AD; box-shadow: 0px 0px 10px black;">
+
+							<form th:action="@{/menu/usuarios/crud}" th:object=${usuario}
+								method="POST">
+
+								<div class="col-12">
+									<label class="h5 mt-3" for="usuario">Usuario</label> <input
+										th:field="*{username}" type="text" class="form-control"
+										placeholder="Ingrese el usuario" required />
+								</div>
+
+								<div class="col-12 mt-3">
+									<label class="h5 mt-3">Contraseña</label> <input
+										th:field="*{password}" type="password" class="form-control"
+										placeholder="Ingrese la contraseña" required />
+
+								</div>
+								<div class="col-12 mt-3">
+									<label for="rol" class="h5">Rol</label>
+									<!--  
+									<select class="form-control border border-dark" th:field="*{rol}" required>
+										<option th:value="${null}" th:text="${'Seleccione una Opción'}" hidden></option>
+										<option th:value="${'Administrador'}" th:text="${'Administrador'}"></option>
+										<option th:value="${'Usuario'}" th:text="${'Usuario'}"></option>
+									</select>
+									-->
+									<select class="form-control" th:field="*{rol}" required>
+										<option hidden="hidden" th:value="${null}" th:text="${'Seleccione una Opción'}" ></option>
+										<option th:each="rol: ${rol}"
+											th:value="${rol.id}"
+											th:text="${rol.nombre}"></option>
+									</select>
+								</div>
+
+								<div class="col-12 mt-2 text-center">
+									<button type="submit" class="btn btn-success form-control ">Guardar</button>
+								</div>
+
+							</form>
+							<div class="col-12 mt-2 mb-2 text-center">
+								<a th:href="@{/menu/usuarios/listar}" class="btn btn-secondary mb-3 form-control ">Cancelar</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-5">
+					<a th:href="@{https://www.google.com.co/search?sa=G&hl=es_419&tbs=simg:CAQSgAIJF1q-8e5klMga9AELELCMpwgaOgo4CAQSFMoW_1gf3Nckpiir4JbAa3hfmEJ0BGhqWLyLPIJyBqqXGx1h_17KAsJsf8Dridd9WoBCAFMAQMCxCOrv4IGgoKCAgBEgReVhGcDAsQne3BCRqUAQofCgxjb252ZXJzYXRpb27apYj2AwsKCS9tLzAxaDhuMAoaCgdzaGFyaW5n2qWI9gMLCgkvbS8wNmgxMmsKHAoJZm9yIGFkdWx02qWI9gMLCgkvYS85M2N3X3kKGwoIY3VzdG9tZXLapYj2AwsKCS9tLzAxajBtawoaCgdtZWV0aW5n2qWI9gMLCgkvbS8wMWg2Y2IM&q=empresa+png&tbm=isch&ved=2ahUKEwiryKaewof4AhUBj4kEHdM5A6gQ2A4oAXoECAEQNA&biw=1366&bih=657&dpr=1#imgrc=pMB_bH_4lF4xCM}">
+						<img th:src="@{/img/empresa.png}" class=" img-fluid">
+					</a>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

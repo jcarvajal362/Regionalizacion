@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body class="body-menu">
+	<div class="container-fluid">
+	
+		<div th:replace="layout/layout :: alerts"></div>
+		
+		<div class="row">
+		
+
+			<!--==========================
+            			IZQUIERDA            
+   			 ===========================-->
+			<div th:replace="layout/layout :: opciones"></div>
+
+			<!--==========================
+                MITAD
+            ===========================-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 second-menu text-center mt-2">
+
+				<div th:replace="layout/layout :: login"></div>
+
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+
+					<h1 th:text="${titulo}" class="text-center text-shadows"></h1>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+
+					<a th:href="@{/menu/usuarios/crud}" class="float-right btn btn-success btn-shadows mt-3 mb-3">Crear
+						Nuevo Usuario</a>
+
+					<div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar mt-5">
+						<table class="table table-striped table-active  table-sm table-hover ">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th >USUARIO</th>
+									<th>CONTRASEÑA (Encriptada)</th>
+									<th>ROL</th>
+									<th colspan="2">ACCIÓN</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr th:each="usuario,it: ${usuario}" sec:authorize="hasRole('ROLE_ADMIN')">
+									<td th:utext="${it.index}+1"></td>
+									<td th:text="${usuario.username}"></td>
+									<td th:text="${usuario.password}"></td>
+									<td th:text="${usuario.rol.nombre}"></td>
+
+									<td><a th:href="@{/menu/usuarios/crud/} + ${usuario.id}">
+											<i class="fa-solid fa-pen-to-square text-primary h3"></i>
+										</a></td>
+									<td><a th:href="@{/menu/usuarios/eliminar/} + ${usuario.id}" th:if="${usuario.id} != 1" onclick="return confirm('Est�s seguro que quieres eliminar?');">  
+										<i class="fa-solid fa-eraser text-danger h3"></i>
+										</a>
+									</td>
+								</tr>
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

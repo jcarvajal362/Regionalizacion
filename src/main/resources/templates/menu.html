@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body class="body-menu">
+	<div class="container-fluid">
+	
+	<div th:replace="layout/layout :: alertsLogin"></div>
+	
+		<div class="row">
+			<!--==========================
+            			IZQUIERDA            
+   			 ===========================-->
+			<div th:replace="layout/layout :: opciones"></div>
+			<!--==========================
+                MITAD
+            ===========================-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 mt-2 second-menu text-center">
+
+				<div th:replace="layout/layout :: login"></div>
+
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+					<label class="h1 text-shadows">Dirección de Regionalización </label>
+				</div>
+				<div class="row ">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 mt-5 ">
+						<p class="mx-auto h4 text-white mt-5 text-center box-shadows"
+							style="background-color: gray; border-radius: 10px">Es una
+							dependencia de las Unidades Tecnológicas de Santander responsable
+							de dirigir, planear, organizar, evaluar y controlar la ejecución
+							de las políticas institucionales para la regionalización, en
+							articulación con las diferentes oficinas
+							académico-administrativas para consolidar el sistema de
+							regionalización.</p>
+					</div>
+
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 mt-5  mx-auto d-block">
+						<a th:href="@{https://www.google.com.co/search?sa=G&hl=es_419&tbs=simg:CAQSgAIJF1q-8e5klMga9AELELCMpwgaOgo4CAQSFMoW_1gf3Nckpiir4JbAa3hfmEJ0BGhqWLyLPIJyBqqXGx1h_17KAsJsf8Dridd9WoBCAFMAQMCxCOrv4IGgoKCAgBEgReVhGcDAsQne3BCRqUAQofCgxjb252ZXJzYXRpb27apYj2AwsKCS9tLzAxaDhuMAoaCgdzaGFyaW5n2qWI9gMLCgkvbS8wNmgxMmsKHAoJZm9yIGFkdWx02qWI9gMLCgkvYS85M2N3X3kKGwoIY3VzdG9tZXLapYj2AwsKCS9tLzAxajBtawoaCgdtZWV0aW5n2qWI9gMLCgkvbS8wMWg2Y2IM&q=empresa+png&tbm=isch&ved=2ahUKEwiryKaewof4AhUBj4kEHdM5A6gQ2A4oAXoECAEQNA&biw=1366&bih=657&dpr=1#imgrc=pMB_bH_4lF4xCM}">
+							<img th:src="@{/img/empresa.png}" class="rounded" width="100%"
+								alt="Imagen alusiva a la empresa">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

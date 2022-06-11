@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+<title>Regionalización</title>
+
+<!-- Required meta tags -->
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Favicon Web -->
+<link rel="icon" type="image/png" th:href="@{/img/logo.jpg}">
+
+<!-- Tipografia Font-->
+<link
+	th:href="@{https://fonts.googleapis.com/css2?family=McLaren&display=swap}"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap/css/bootstrap.min.css}" />
+
+<!-- Styles CSS  -->
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/formato.css}" />
+
+
+<!-- Icons Font Aweasome JS-->
+<script th:src="@{/fonts/all.min.js}"></script>
+
+<!-- Datatables JQuery -->
+<link th:href="@{https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css}" rel="stylesheet" type="text/css" />
+
+
+</head>
+
+<body>
+	<!-- OPCION DE VENTANA EXCEL REPORTE SEMESTRE / AÑO -->
+	<div th:fragment="reporteS">
+		<div class="modal fade" id="reporteS" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<nav>
+							<div class="nav nav-tabs" id="nav-tab" role="tablist">
+								<a class="nav-item nav-link active" id="listado-semestral" data-toggle="tab" href="#listado-semestrall" role="tab" aria-controls="nav-home" aria-selected="true">Listado Semestral</a> 
+								<a class="nav-item nav-link" id="listado-anual" data-toggle="tab" href="#listado-anuall" role="tab" aria-controls="nav-profile" aria-selected="false">Listado Anual</a>
+							</div>
+						</nav>
+
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+
+						<div class="tab-content" id="nav-tabContent">
+							<div class="tab-pane fade show active" id="listado-semestrall"
+								role="tabpanel" aria-labelledby="listado-semestral">
+
+
+								<form class="form-inline float-right"
+									th:action="@{/excelrs/export} + ${'?format=xlsx'}">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-6">
+												<label class="h5" for="fechaI">Fecha Inicial</label> <input
+													id="fechaI" name="fechaI" th:value="${fechaI}"
+													class="form-control box-shadows" type="date" required />
+											</div>
+											<div class="col-6">
+												<label class="h5">Fecha Final</label> <input id="fechaF"
+													class="form-control box-shadows" name="fechaF"
+													th:value="${fechaF}" type="date" required />
+											</div>
+										</div>
+									</div>
+									<div class="col-12 mt-3">
+										<input type="submit" class="btn btn-success box-shadows"
+											th:value="${'Generar Reporte Semestral Excel'}" />
+									</div>
+								</form>
+							</div>
+
+
+
+
+
+							<div class="tab-pane fade" id="listado-anuall" role="tabpanel"
+								aria-labelledby="listado-anual">
+								<form class="form-inline float-right"
+									th:action="@{/excelra/export} + ${'?format=xlsx'}">
+									<div class="col-12">
+										<label class="h5">Año</label> 
+										<input type="number" id="anyo" name="anyo" class="form-control box-shadows" min="2018" max="2030" value="2022"  placeholder="aaaa" required />
+
+
+									</div>
+									<div class="col-12 mt-3">
+										<input type="submit" class="btn btn-success box-shadows"
+											th:value="${'Generar Reporte Anual Excel'}" />
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- OPCION DE VENTANA EXCEL REPORTE SEMESTRE / AÑO  -->
+
+
+
+	<!-- OPCION DE VENTANA CONSOLIDADO -->
+	<div th:fragment="consolidado">
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Filtrar
+							Consolidado por Fecha</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form class="form-inline float-right"
+							th:action="@{/excel/export} + ${'?format=xlsx'}">
+							<div class="col-12">
+								<div class="row">
+									<div class="col-6">
+										<label class="h5">Fecha Inicial</label> <input
+											id="fechaInicio" class="form-control box-shadows"
+											name="fechaInicio" th:value="${fechaInicio}" type="date"
+											required />
+									</div>
+									<div class="col-6">
+										<label class="h5">Fecha Final</label> <input id="fechaFinal"
+											class="form-control box-shadows" name="fechaFinal"
+											th:value="${fechaFinal}" type="date" required />
+									</div>
+								</div>
+							</div>
+							<div class="col-12 mt-3">
+								<input type="submit" class="btn btn-success box-shadows"
+									th:value="${'Generar Consolidado Excel'}" />
+							</div>
+
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- OPCION DE VENTANA CONSOLIDADO -->
+
+
+
+	<!-- ALERTAS LOGIN -->
+	<div th:fragment="alertsLogin">
+		<div th:if=${param.error}>
+			<div class="alert alert-danger">Usuario o contraseña inválidos</div>
+		</div>
+
+		<div th:if=${param.logout}>
+			<div class="alert alert-info">Ha cerrado sesión exitosamente</div>
+		</div>
+		<div th:if="${param.ingreso}">
+			<div class="alert alert-info">
+				¡Bienvenido Al aplicativo <span
+					sec:authentication="principal.username"
+					style="text-transform: uppercase;"></span>!
+			</div>
+		</div>
+
+	</div>
+	<!-- ALERTAS LOGIN -->
+
+	<!-- ALERTAS EN GENERAL -->
+	<div th:fragment="alerts">
+		<div class="alert alert-success" role="alert"
+			th:if="${success != null}" th:text="${success}"></div>
+		<div class="alert alert-danger" role="alert" th:if="${error != null}"
+			th:text="${error}"></div>
+		<div class="alert alert-warning" role="alert"
+			th:if="${warning != null}" th:text="${warning}"></div>
+		<div class="alert alert-info" role="alert" th:if="${info != null}"
+			th:text="${info}"></div>
+	</div>
+	<!-- ALERTAS EN GENERAL -->
+
+	<!-- MENSAJE DE BIENVENIDO CON LA OPCION -->
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right mt-1"
+		th:fragment="login">
+		<label class="h5"> Bienvenido: <span
+			sec:authentication="principal.username"></span></label>
+
+		<div class="btn-group">
+			<button type="button" class="btn btn-secondary dropdown-toggle"
+				data-toggle="dropdown" data-display="static" aria-haspopup="true"
+				aria-expanded="false">
+				<i class="fa-solid fa-gear "></i>
+			</button>
+			<div class="dropdown-menu dropdown-menu-lg-right">
+				<a class="dropdown-item" th:href="@{/menu/usuarios/listar}"
+					sec:authorize="hasRole('ROLE_ADMIN')">Listado de Usuarios</a>
+				<div class="dropdown-divider" sec:authorize="hasRole('ROLE_ADMIN')"></div>
+				<a class="dropdown-item" sec:authorize="isAuthenticated()"
+					th:href="@{/logout}"
+					onclick="return confirm('Estas seguro de cerrar sesión?');">Cerrar
+					Sesión</a>
+			</div>
+		</div>
+	</div>
+	<!-- MENSAJE DE BIENVENIDO CON LA OPCION -->
+
+	<!-- OPCIONES GENERALES DEL APLICATIVO -->
+	<div
+		class="col-xs-12 col-sm-12 col-md-12 col-lg-2 text-center text-white "
+		th:fragment="opciones">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<a
+				th:href="@{https://www.facebook.com/UnidadesTecnologicasdeSantanderUTS/photos/a.160396810701478/2847051728702626/}">
+				<img th:src="@{/img/logo.jpg}" alt="logo"
+				class="img-fluid logo-menu">
+			</a>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-4 opc">
+			<a th:href="@{/menu/index}">
+				<h4>INICIO</h4>
+			</a>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-4 opc">
+			<a th:href="@{/menu/regionales}"
+				sec:authorize="hasRole('ROLE_ADMIN')">
+				<h4>REGIONALES</h4>
+			</a> <a th:href="@{/menu/regional}" sec:authorize="hasRole('ROLE_USER')">
+				<h4>REGIONALES</h4>
+			</a>
+		</div>
+
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-4 opc">
+			<a th:href="@{/menu/facultades}">
+				<h4>FACULTADES</h4>
+			</a>
+
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-4 opc">
+			<a th:href="@{/menu/programas/listar}">
+				<h4>PROGRAMAS</h4>
+			</a>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-4 opc">
+			<a th:href="@{/menu/estudiantes}">
+				<h4>ESTUDIANTES</h4>
+			</a>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-4 opc">
+			<a th:href="@{/menu/docentes/listar}">
+				<h4>DOCENTES</h4>
+			</a>
+
+		</div>
+		<!-- 
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3 opc">
+			<a th:href="@{/menu/enviarReporte}">
+				<h4>ENVIAR REPORTE</h4>
+			</a>
+		</div>
+		-->
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-4 foot-menu">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<label class="h5">Regionalización UTS</label>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+				<i class="fa-solid fa-people-group display-4"></i>
+			</div>
+		</div>
+	</div>
+	<!-- OPCIONES GENERALES DEL APLICATIVO -->
+
+
+	<footer th:fragment="footer">
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script th:src="@{/js/bootstrap/js/jquery.min.js}"></script>
+		<script th:src="@{/js/bootstrap/js/popper.min.js}"></script>
+		<script th:src="@{/js/bootstrap/js/bootstrap.min.js}"></script>
+
+		<!-- Datetables JQuery -->
+		<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js}"></script>
+
+		<script
+			th:src="@{https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/js/formato.js}"></script>
+
+	</footer>
+</body>
+
+</html>
